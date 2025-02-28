@@ -17,7 +17,7 @@ include_directories(include)
 project(leetcode CXX C ASM)
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
 set(COMMON_LDFLAGS
         -fsanitize=address
@@ -49,3 +49,4 @@ set(COMMON_CFLAGS
 )
 
 add_subdirectory(valid_parentheses)
+add_subdirectory(merge_sorted_array)

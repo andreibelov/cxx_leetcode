@@ -22,6 +22,7 @@ build/
 gdb.txt
 
 /valid_parentheses/valid_parentheses
+/merge_sorted_array/merge_sorted_array
 
 main
 ### C template
