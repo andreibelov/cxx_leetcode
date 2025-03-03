@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #ifndef SOLUTION_HPP
 #define SOLUTION_HPP
 
-
 #include <vector>
 
-class Solution{
+class Solution {
 public:
 	/**
 	 * 88. Merge Sorted Array

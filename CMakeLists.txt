@@ -14,12 +14,17 @@ cmake_minimum_required(VERSION 3.27)
 
 include_directories(include)
 
-project(leetcode CXX C ASM)
+set(CMAKE_CXX_COMPILER gcc)
+#set(CMAKE_CXX_COMPILER g++)
+#set(CMAKE_CXX_COMPILER clang++)
+
+project(cxx_leetcode CXX C ASM)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 14)
 
 set(COMMON_LDFLAGS
+        -lstdc++
         -fsanitize=address
         -fsanitize=undefined
         -fno-sanitize-recover
@@ -51,3 +56,4 @@ set(COMMON_CFLAGS
 add_subdirectory(valid_parentheses)
 add_subdirectory(merge_sorted_array)
 add_subdirectory(merge_two_sorted_lists)
+add_subdirectory(lru_cache)
