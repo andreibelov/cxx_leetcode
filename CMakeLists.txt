@@ -50,3 +50,4 @@ set(COMMON_CFLAGS
 
 add_subdirectory(valid_parentheses)
 add_subdirectory(merge_sorted_array)
+add_subdirectory(merge_two_sorted_lists)

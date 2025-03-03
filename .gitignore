@@ -23,6 +23,7 @@ gdb.txt
 
 /valid_parentheses/valid_parentheses
 /merge_sorted_array/merge_sorted_array
+/merge_two_sorted_lists/merge_two_sorted_lists
 
 main
 ### C template
