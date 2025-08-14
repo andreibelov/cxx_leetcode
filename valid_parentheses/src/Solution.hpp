@@ -19,7 +19,7 @@
 class Solution {
 public:
 	// 20. Valid Parentheses
-	static bool isValid(std::string s);
+	static bool isValid(const std::string& str);
 };
 
 #endif //SOLUTION_HPP

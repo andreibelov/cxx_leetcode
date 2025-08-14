@@ -17,15 +17,15 @@
 /**
  * 20. Valid Parentheses
  *
- *
- * @param s
+ * @param str
  * @return
  */
-bool Solution::isValid(std::string s)
+bool Solution::isValid(const std::string& str)
 {
 	std::vector<char> stack;
 
-	for(auto c : s){
+	for (char c: str)
+	{
 		if (c == '(' || c == '{' || c == '[')
 			stack.push_back(c);
 		else if (c == ')' || c == '}' || c == ']')
