@@ -5,39 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 23:40:09 by abelov            #+#    #+#             */
-/*   Updated: 2025/02/27 23:40:09 by abelov           ###   ########.fr       */
+/*   Created: 2025/08/15 19:07:25 by abelov            #+#    #+#             */
+/*   Updated: 2025/08/15 19:07:25 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cstdlib>
 #include "Solution.hpp"
 #include "leetcode_150.hpp"
 
 typedef struct s_input
 {
-	std::vector<int> nums1;
-	int m;
-	std::vector<int> nums2;
-	int n;
+	std::vector<int> nums;
+	int val;
 	std::vector<int> expected;
 } Input;
 
 int ft_do_test(Input *input)
 {
-	std::vector<int> &result = input->nums1;
+	std::vector<int> &result = input->nums;
 	int check_val;
 
 	Solution sol;
-	sol.merge(input->nums1, input->m, input->nums2, input->n);
-	check_val = input->expected.size() == input->nums1.size();
+	sol.removeElement(input->nums, input->val);
+	check_val = input->expected.size() == input->nums.size();
 	if (!check_val)
 	{
 		std::cout << "got array of size [\"" << result.size()
 				  << "\"] whilst [\"" << input->expected.size()
 				  << "\"] was to be expected" << std::endl;
 	}
-	else if ((check_val = (input->expected == input->nums1)) != 1)
+	else if ((check_val = (input->expected == input->nums)) != 1)
 	{
 		check(check_val);
 		std::cout << "got " << result << " whilst " << input->expected
@@ -53,19 +50,14 @@ int main()
 
 	Input inputs[] = {
 		{
-			.nums1 = {0}, .m = 0,
-			.nums2 = {1}, .n = 1,
-			.expected = {1}
+			.nums = {3, 2, 2, 3},
+			.val = 3,
+			.expected = {2, 2}
 		},
 		{
-			.nums1 = {1}, .m = 1,
-			.nums2 = {}, .n = 0,
-			.expected = {1}
-		},
-		{
-			.nums1 = {1, 2, 3, 0, 0, 0}, .m = 3,
-			.nums2 = {2, 5, 6}, .n = 3,
-			.expected = {1, 2, 2, 3, 5, 6}
+			.nums = {0, 1, 2, 2, 3, 0, 4, 2},
+			.val = 2,
+			.expected = {0, 1, 3, 0, 4}
 		},
 	};
 
@@ -74,3 +66,5 @@ int main()
 
 	return (EXIT_SUCCESS);
 }
+
+

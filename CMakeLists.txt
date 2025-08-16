@@ -6,7 +6,7 @@
 #    By: abelov <abelov@student.42london.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/26 12:58:14 by abelov            #+#    #+#              #
-#    Updated: 2025/02/26 12:58:14 by abelov           ###   ########.fr        #
+#    Updated: 2025/08/15 19:07:08 by abelov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ set(COMMON_CFLAGS
         -Wno-error=unused-variable
         -O0
         -masm=att
-        -fno-exceptions
         -ffunction-sections
         -fdata-sections
         -fno-omit-frame-pointer
@@ -58,3 +57,4 @@ add_subdirectory(merge_sorted_array)
 add_subdirectory(merge_two_sorted_lists)
 add_subdirectory(lru_cache)
 add_subdirectory(rotate_array)
+add_subdirectory(remove_element)

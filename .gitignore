@@ -6,7 +6,7 @@
 #    By: abelov <abelov@student.42london.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 00:15:21 by abelov            #+#    #+#              #
-#    Updated: 2023/12/05 00:15:29 by abelov           ###   ########.fr        #
+#    Updated: 2025/08/15 18:17:49 by abelov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,9 @@ gdb.txt
 /merge_two_sorted_lists/merge_two_sorted_lists
 /lru_cache/lru_cache
 /rotate_array/rotate_array
-
+/remove_element/remove_element
 main
+
 ### C template
 # Prerequisites
 *.d
@@ -231,4 +232,3 @@ Temporary Items
 *.exe
 *.out
 *.app
-
