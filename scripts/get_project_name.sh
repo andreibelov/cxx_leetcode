@@ -1,35 +1,48 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-exec </dev/tty >/dev/tty 2>&1
+DEFAULT_NAME="${DEFAULT_NAME:- }"
+MAXLEN="${MAXLEN:-35}"
 
-default="new_prjct_name"
+default="$DEFAULT_NAME"
 
 while :; do
-    echo -e "Name of the new project to be created: \n"
-    read -e -r -i "$default" -p "> " name
-    name="$(printf "%s" "$name" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+    echo "Enter name of the new project to be created:" >&2;
+    read -e -r -i "$default" -p "> " raw || { echo "aborted" >&2; exit 2; }
+    echo "" >&2;
 
-    if [ -z "$name" ]; then
+    # trim leading/trailing whitespace
+    raw="$(printf "%s" "$raw" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+
+    if [ -z "$raw" ]; then
         echo "Please enter a non-empty name." >&2
         default=""
         continue
     fi
 
-    case "$name" in
-        *[!A-Za-z0-9._-]*)
-            echo "Only A-Z a-z 0-9 . _ - are allowed." >&2
-            default="$name"
-            continue
-            ;;
-    esac
+    # Normalize raw name: tolower, non-alnum -> '_', collapse, trim, cut to MAXLEN
+    name="$(printf "%s\n" "$raw" | awk -v maxlen="$MAXLEN" '
+        {
+            s = tolower($0);
+            gsub(/[^a-z0-9]+/, "_", s);
+            gsub(/^_+|_+$$/, "", s);
+            gsub(/_+/, "_", s);
+            if (length(s) > maxlen) s = substr(s, 1, maxlen);
+            print s;
+        }
+    ')"
 
-    if [ -e "$name" ]; then
-        echo "Path '$name' already exists, pick another." >&2
-        default="$name"
+    if [ -z "$name" ]; then
+        echo -e "Resulting name is empty after sanitization, try again.\n" >&2
+        default="$raw"
         continue
     fi
 
+    if [ -e "$name" ]; then
+        echo "Path '$name' already exists, pick another." >&2
+        default="$raw"
+        continue
+    fi
     printf "%s\n" "$name"
     break
 done

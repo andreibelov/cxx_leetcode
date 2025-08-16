@@ -10,22 +10,25 @@
 #                                                                              #
 # **************************************************************************** #
 
-# Scaffolding Makefile for cxx_leetcode
+# Scaffolding Makefile
 # Usage:
 #   make new
 #   make list-template
 #
-# It creates:
-#   <NAME>/
-#     CMakeLists.txt        (from template, placeholders substituted)
+# Creates:
+#   <name>/
+#     CMakeLists.txt
 #     src/main.cpp
 #     src/Solution.cpp
-#     include/Solution.hpp  (optional per-problem header)
+#     include/Solution.hpp
 
 SHELL			:= /bin/bash
+
+# remove built-in suffix rules to avoid fallback like '.o'
+.SUFFIXES:
+
 TEMPLATE_DIR	?= templates/assignment
 PLACEHOLDER		?= __PROJECT_NAME__
-
 
 # Defaults to quiet. Use "make V=1" to have verbose output.
 V ?= 0
@@ -54,6 +57,9 @@ all: ensure-template
 new-%: ensure-template
 	$(Q)set -e; \
 	export name="$*"; \
+	if [ -z "$$name" ]; then \
+		echo "Empty assignment name" >&2; exit 2; \
+	fi; \
 	if [ -e "$$name" ]; then \
 		printf "Directory '%s' already exists\n" "$$name" >&2; exit 1; \
 	fi; \
@@ -73,9 +79,12 @@ new-%: ensure-template
 	done; \
 	echo "add_subdirectory($$name)" >> CMakeLists.txt; \
 	git add "$$name" .gitignore; \
-	printf "Assignment '%s' created.\n" "$$name"; \
 	cmake -S . -B .build -G Ninja && \
 	cmake --build .build --target "$$name";
+	$(Q)printf '\n'; printf '=%.0s' {1..80}; printf '\n\n'; \
+	printf "  Assignment '$*' has been created.\n\n"; \
+	printf "  You can now build it with: \n\n\tcmake --build .build --target '$*'\n\n"; \
+	printf '=%.0s' {1..80}; printf '\n\n';
 
 ## Sanity check that template exists
 ensure-template:
@@ -91,7 +100,7 @@ list-template: ensure-template
 	$(Q)find "$(TEMPLATE_DIR)" -maxdepth 2 -type f | sed 's|^|  |'
 
 # Name for interactive mode if NAME was not provided
-PROJECT_NAME ?= $(shell bash -c "echo 'Name of the new stack to be created:' >&2; read -e -p $$'> ' stack_name;"' echo $$stack_name')
+PROJECT_NAME ?= $(shell bash ./scripts/get_project_name.sh)
 
 # Interactive variant, will prompt for the name
 new: ensure-template

@@ -1,9 +1,9 @@
 #include "Solution.hpp"
 
-int Solution::solve(const std::vector<int>& nums)
+int Solution::solve(std::vector<int>& nums, int val)
 {
 	// TODO: implement
-	int acc = 0;
+	int acc = val;
 	for (int num: nums)
 		acc += num;
 	return acc;

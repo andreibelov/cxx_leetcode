@@ -8,5 +8,5 @@
 
 struct Solution {
 	// TODO: adapt signature to the problem
-	int solve(const std::vector<int>& nums);
+	int solve(std::vector<int>& nums, int val);
 };
