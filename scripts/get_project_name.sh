@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DEFAULT_NAME="${DEFAULT_NAME:- }"
-MAXLEN="${MAXLEN:-35}"
+MAXLEN="${MAXLEN:-38}"
 
 default="$DEFAULT_NAME"
 
