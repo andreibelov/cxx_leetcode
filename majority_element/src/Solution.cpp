@@ -28,7 +28,7 @@
 int Solution::majorityElement(std::vector<int>& nums)
 {
 	if (nums.size() == 1)
-		return static_cast<int>(nums[0]);
+		return nums[0];
 
 	int maj = 0;
 	std::unordered_map<int,int>	tbl;

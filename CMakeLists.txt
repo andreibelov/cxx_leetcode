@@ -14,9 +14,9 @@ cmake_minimum_required(VERSION 3.27)
 
 include_directories(include)
 
-set(CMAKE_C_COMPILER gcc-10)
-set(CMAKE_CXX_COMPILER gcc-10)
-#set(CMAKE_CXX_COMPILER g++-10)
+set(CMAKE_C_COMPILER gcc-13)
+set(CMAKE_CXX_COMPILER gcc-13)
+#set(CMAKE_CXX_COMPILER g++)
 #set(CMAKE_CXX_COMPILER clang++)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -24,7 +24,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(cxx_leetcode CXX C ASM)
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 23)
 
 set(COMMON_LIBS
 		m
@@ -34,10 +34,12 @@ set(COMMON_LIBS
 set(COMMON_LDFLAGS
 		-lm
 		-g3 -gdwarf-3
-#        -fsanitize=address,undefined
-#        -fsanitize=float-divide-by-zero,float-cast-overflow
-#		-fno-sanitize-recover
+        -fsanitize=address,undefined,bounds,alignment,object-size
+		-fsanitize=shift,signed-integer-overflow,null,return
+        -fsanitize=float-divide-by-zero,float-cast-overflow
+		-fno-sanitize-recover
 )
+
 set(COMMON_CFLAGS
 		-x c++
         -Wall -Wextra -Werror
@@ -52,12 +54,12 @@ set(COMMON_CFLAGS
         -fno-omit-frame-pointer
         -fdwarf2-cfi-asm
         -fcf-protection=none
-#        -mmanual-endbr
+        -mmanual-endbr
         -g3 -gdwarf-3
         -fasynchronous-unwind-tables
-#        -fsanitize=address,undefined
-#		-fsanitize=float-divide-by-zero,float-cast-overflow
-#		-fno-sanitize-recover
+        -fsanitize=address,undefined
+		-fsanitize=float-divide-by-zero,float-cast-overflow
+		-fno-sanitize-recover
 )
 
 add_subdirectory(valid_parentheses)
@@ -70,3 +72,4 @@ add_subdirectory(remove_duplicates_from_sorted_array)
 add_subdirectory(remove_duplicates_from_sorted_array_ii)
 add_subdirectory(majority_element)
 add_subdirectory(best_time_to_buy_and_sell_stock)
+add_subdirectory(best_time_to_buy_and_sell_stock_ii)

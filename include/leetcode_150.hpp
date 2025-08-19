@@ -14,6 +14,7 @@
 #ifndef LEETCODE_150_HPP
 #define LEETCODE_150_HPP
 
+#include <array>
 #include <iostream>
 #include <iterator>
 #include <vector>
