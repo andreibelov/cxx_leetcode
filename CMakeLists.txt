@@ -14,42 +14,50 @@ cmake_minimum_required(VERSION 3.27)
 
 include_directories(include)
 
-set(CMAKE_CXX_COMPILER gcc)
-#set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_C_COMPILER gcc-10)
+set(CMAKE_CXX_COMPILER gcc-10)
+#set(CMAKE_CXX_COMPILER g++-10)
 #set(CMAKE_CXX_COMPILER clang++)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(cxx_leetcode CXX C ASM)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 14)
 
+set(COMMON_LIBS
+		m
+		stdc++
+)
+
 set(COMMON_LDFLAGS
-        -lstdc++
-        -fsanitize=address
-        -fsanitize=undefined
-        -fno-sanitize-recover
-        -fsanitize=float-divide-by-zero
-        -fsanitize=float-cast-overflow)
+		-lm
+		-g3 -gdwarf-3
+#        -fsanitize=address,undefined
+#        -fsanitize=float-divide-by-zero,float-cast-overflow
+#		-fno-sanitize-recover
+)
 set(COMMON_CFLAGS
+		-x c++
         -Wall -Wextra -Werror
         -Wwrite-strings -Wnarrowing
         -Wno-error=unused-parameter
         -Wno-error=unused-variable
-        -O0
+		-O0
         -masm=att
+		-march=native
         -ffunction-sections
         -fdata-sections
         -fno-omit-frame-pointer
         -fdwarf2-cfi-asm
         -fcf-protection=none
-        -mmanual-endbr
+#        -mmanual-endbr
         -g3 -gdwarf-3
         -fasynchronous-unwind-tables
-        -fsanitize=address
-        -fsanitize=undefined
-        -fno-sanitize-recover
-        -fsanitize=float-divide-by-zero
-        -fsanitize=float-cast-overflow
+#        -fsanitize=address,undefined
+#		-fsanitize=float-divide-by-zero,float-cast-overflow
+#		-fno-sanitize-recover
 )
 
 add_subdirectory(valid_parentheses)
@@ -61,3 +69,4 @@ add_subdirectory(remove_element)
 add_subdirectory(remove_duplicates_from_sorted_array)
 add_subdirectory(remove_duplicates_from_sorted_array_ii)
 add_subdirectory(majority_element)
+add_subdirectory(best_time_to_buy_and_sell_stock)

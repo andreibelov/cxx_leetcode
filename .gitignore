@@ -30,6 +30,7 @@ gdb.txt
 /remove_duplicates_from_sorted_array/remove_duplicates_from_sorted_array
 /remove_duplicates_from_sorted_array_ii/remove_duplicates_from_sorted_array_ii
 /majority_element/majority_element
+/best_time_to_buy_and_sell_stock/best_time_to_buy_and_sell_stock
 main
 
 ### C template

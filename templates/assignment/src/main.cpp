@@ -1,12 +1,12 @@
 #include "Solution.hpp"
 #include "leetcode_150.hpp"
 
-typedef struct s_input
+using Input = struct s_input
 {
 	std::vector<int> nums;
 	int val;
-	std::vector<int> expected;
-} Input;
+	int expected;
+};
 
 int ft_do_test(Input *input)
 {
@@ -36,7 +36,7 @@ int ft_do_test(Input *input)
 int main()
 {
 
-	Input inputs[] = {
+	auto inputs = std::to_array<Input>({
 		{
 			.nums = {3, 2, 2, 3},
 			.val = 3,
@@ -47,7 +47,7 @@ int main()
 			.val = 2,
 			.expected = {0, 1, 4, 0, 3}
 		},
-	};
+	});
 
 	for (Input in: inputs)
 		ft_do_test(&in);

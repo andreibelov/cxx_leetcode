@@ -1,0 +1,17 @@
+Checks: >
+  bugprone-*,
+  performance-*,
+  readability-*,
+  cppcoreguidelines-*,
+  clang-analyzer-*,
+  modernize-*,
+  -readability-magic-numbers,
+  -readability-braces-around-statements,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-owning-memory,
+  -performance-avoid-endl,
+  -modernize-use-trailing-return-type,
+  -readability-convert-member-functions-to-static
+
+WarningsAsErrors: ''
+HeaderFilterRegex: '.*'

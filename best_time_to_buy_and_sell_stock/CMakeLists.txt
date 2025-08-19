@@ -6,12 +6,12 @@
 #    By: abelov <abelov@student.42london.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/14 16:47:24 by abelov            #+#    #+#              #
-#    Updated: 2025/08/14 16:47:25 by abelov           ###   ########.fr        #
+#    Updated: 2025/08/18 22:45:52 by abelov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 cmake_minimum_required(VERSION 3.16)
-project(__PROJECT_NAME__ CXX C ASM)
+project(best_time_to_buy_and_sell_stock CXX C ASM)
 
 set(TARGET_EXE_NAME "${PROJECT_NAME}_exe")
 
@@ -23,6 +23,7 @@ target_compile_definitions(${TARGET_EXE_NAME} PRIVATE USE_SIMPLE)
 target_compile_options(${TARGET_EXE_NAME} PRIVATE ${COMMON_CFLAGS})
 target_link_options(${TARGET_EXE_NAME} PRIVATE ${COMMON_LDFLAGS})
 target_link_libraries(${TARGET_EXE_NAME} PRIVATE ${COMMON_LIBS})
+target_compile_features(${TARGET_EXE_NAME} PRIVATE cxx_std_20)
 target_include_directories(${TARGET_EXE_NAME}
 		PRIVATE "${PROJECT_SOURCE_DIR}/include")
 

@@ -22,17 +22,19 @@
  *
  * @param capacity
  */
-LRUCache::LRUCache(int capacity) : capacity(capacity), currentSize(0)
+LRUCache::LRUCache(int capacity)
+	: head(new Node()),
+	tail(new Node()),
+	capacity(capacity),
+	currentSize(0)
 {
-	head = new Node();
-	tail = new Node();
 	head->next = tail;
 	tail->prev = head;
 }
 
 int LRUCache::get(int key)
 {
-	if (!cache.count(key)) return -1;
+	if (cache.count(key) == 0U) return -1;
 	Node *node = cache[key];
 	promoteNode(node); // Move node to head to mark as recently used
 	return node->value;
@@ -40,7 +42,7 @@ int LRUCache::get(int key)
 
 void LRUCache::put(int key, int value)
 {
-	if (cache.count(key))
+	if (cache.count(key) != 0U)
 	{
 		Node *node = cache[key];
 		node->value = value;

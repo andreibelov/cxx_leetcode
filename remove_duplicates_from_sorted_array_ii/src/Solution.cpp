@@ -20,6 +20,9 @@
  * Given an integer array nums sorted in non-decreasing order, remove some
  * duplicates in-place such that each unique element appears at most twice.
  * The relative order of the elements should be kept the same.
+ *
+ * What is the best way to use a HashMap in C++?
+ * @see https://stackoverflow.com/questions/3578083/#3578247
  * @param nums
  * @return
  */
