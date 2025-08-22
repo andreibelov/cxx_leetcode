@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/15 19:07:25 by abelov            #+#    #+#             */
-/*   Updated: 2025/08/15 19:07:25 by abelov           ###   ########.fr       */
+/*   Created: 2025/08/20 11:27:17 by abelov            #+#    #+#             */
+/*   Updated: 2025/08/20 11:27:17 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,50 +16,42 @@
 using Input = struct s_input
 {
 	std::vector<int> nums;
-	int val;
-	std::vector<int> expected;
+	bool expected;
 };
 
 int ft_do_test(Input &input)
 {
-	std::vector<int> &result = input.nums;
-	bool check_val;
+	bool check_val = false;
+	bool result = false;
 
 	Solution sol;
-	sol.removeElement(input.nums, input.val);
-	check_val = input.expected.size() == input.nums.size();
+	result = sol.canJump(input.nums);
+	check_val = (input.expected == result);
 	if (!check_val)
 	{
-		std::cout << "got array of size [\"" << result.size()
-				  << "\"] whilst [\"" << input.expected.size()
+		std::cout << "got [\"" << (result ? "true" : "false")
+				  << "\"] whilst [\"" << (input.expected ? "true" : "false")
 				  << "\"] was to be expected" << std::endl;
 	}
-	else if ((check_val = (input.expected == input.nums)) != 1)
-	{
-		check(check_val);
-		std::cout << "got " << result << " whilst " << input.expected
-				  << " was to be expected" << std::endl;
-	}
-	else
-		check(check_val);
+	check(check_val);
 	return (0);
 }
 
 int main()
 {
 	auto inputs = std::to_array<Input>(
-	{
 		{
-			.nums = {3, 2, 2, 3},
-			.val = 3,
-			.expected = {2, 2}
-		},
-		{
-			.nums = {0, 1, 2, 2, 3, 0, 4, 2},
-			.val = 2,
-			.expected = {0, 1, 3, 0, 4}
-		},
-	});
+			{
+				.nums = {2,3,1,1,4},
+				.expected = true
+			},
+			{
+				.nums = {3,2,1,0,4},
+				.expected = false
+			},
+
+		}
+	);
 
 	for (Input test: inputs)
 		ft_do_test(test);

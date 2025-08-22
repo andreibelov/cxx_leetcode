@@ -36,19 +36,18 @@ int ft_do_test(Input &input)
 int main()
 {
 	auto	inputs = std::to_array<Input>(
+	{
 		{
-			{
-				.nums = {3, 2, 2, 3},
-				.val = 3,
-				.expected = {2, 2}
-			},
-			{
-				.nums = {0, 1, 2, 2, 3, 0, 4, 2},
-				.val = 2,
-				.expected = {0, 1, 4, 0, 3}
-			},
-		}
-	);
+			.nums = {3, 2, 2, 3},
+			.val = 3,
+			.expected = {2, 2}
+		},
+		{
+			.nums = {0, 1, 2, 2, 3, 0, 4, 2},
+			.val = 2,
+			.expected = {0, 1, 4, 0, 3}
+		},
+	});
 
 	for (Input test: inputs)
 		ft_do_test(test);

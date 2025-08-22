@@ -63,7 +63,7 @@ new-%: ensure-template
 	if [ -e "$$name" ]; then \
 		printf "Directory '%s' already exists\n" "$$name" >&2; exit 1; \
 	fi; \
-	printf "Creating '%s'...\n" "$$name"; \
+	printf "\nCreating '%s'...\n" "$$name"; \
 	sed -e '0,/main/{/main/i\' -e "/$$name/$$name" -e '}' -i .gitignore; \
 	mkdir -p "$$name/src" "$$name/include"; \
 	rsync -a "$(TEMPLATE_DIR)/" "$$name/"; \
@@ -76,14 +76,17 @@ new-%: ensure-template
 		$${files[@]} 2>/dev/null || true; \
 	for f in $${files[@]}; do \
 	  vim -Es -Nu NONE -c "runtime plugin/stdheader.vim" +"Stdheader" +wq -- "$$f"; \
-	done; \
-	echo "add_subdirectory($$name)" >> CMakeLists.txt; \
-	git add "$$name" .gitignore; \
-	cmake -S . -B .build -G Ninja && \
-	cmake --build .build --target "$$name";
+	done;
+	$(Q)printf "cmake -S . -B .build -G Ninja\n"; \
+	printf "cmake --build .build --target $*\n"; \
+	printf "\nUpdating cmake files...\n"; \
+	echo "add_subdirectory($*)" >> CMakeLists.txt; \
+	git add "$*" .gitignore; \
+	cmake -S . -B .build -G Ninja; \
+	printf "\nBuilding the project...\n"; \
+	cmake --build .build --target "$*";
 	$(Q)printf '\n'; printf '=%.0s' {1..80}; printf '\n\n'; \
 	printf "  Assignment '$*' has been created.\n\n"; \
-	printf "  You can now build it with: \n\n\tcmake --build .build --target '$*'\n\n"; \
 	printf '=%.0s' {1..80}; printf '\n\n';
 
 ## Sanity check that template exists

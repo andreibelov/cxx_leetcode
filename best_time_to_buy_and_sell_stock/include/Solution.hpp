@@ -19,7 +19,9 @@
 #include <algorithm>
 
 
-struct Solution {
+class Solution {
+public:
+
 	/**
 	 * Constraints:
 	 * 1 <= prices.length <= 10^5

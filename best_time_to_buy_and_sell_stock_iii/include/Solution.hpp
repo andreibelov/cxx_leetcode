@@ -18,7 +18,8 @@
 #include <iostream>
 #include <algorithm>
 
-struct Solution {
+class Solution {
+public:
 
 	/**
 	 * 123. Best Time to Buy and Sell Stock III

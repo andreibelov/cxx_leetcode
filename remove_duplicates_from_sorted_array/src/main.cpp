@@ -13,30 +13,30 @@
 #include "Solution.hpp"
 #include "leetcode_150.hpp"
 
-typedef struct s_input
+using Input = struct s_input
 {
 	std::vector<int> nums;
 	std::vector<int> expected;
-} Input;
+};
 
-int ft_do_test(Input *input)
+int ft_do_test(Input &input)
 {
-	std::vector<int> &result = input->nums;
+	std::vector<int> &result = input.nums;
 	int check_val;
 
 	Solution sol;
-	sol.removeDuplicates(input->nums);
-	check_val = input->expected.size() == input->nums.size();
+	sol.removeDuplicates(input.nums);
+	check_val = input.expected.size() == input.nums.size();
 	if (!check_val)
 	{
 		std::cout << "got array of size [\"" << result.size()
-				  << "\"] whilst [\"" << input->expected.size()
+				  << "\"] whilst [\"" << input.expected.size()
 				  << "\"] was to be expected" << std::endl;
 	}
-	else if ((check_val = (input->expected == input->nums)) != 1)
+	else if ((check_val = (input.expected == input.nums)) != 1)
 	{
 		check(check_val);
-		std::cout << "got " << result << " whilst " << input->expected
+		std::cout << "got " << result << " whilst " << input.expected
 				  << " was to be expected" << std::endl;
 	}
 	else
@@ -46,8 +46,8 @@ int ft_do_test(Input *input)
 
 int main()
 {
-
-	Input inputs[] = {
+	auto inputs = std::to_array<Input>(
+	{
 		{
 			.nums = {1,1,2},
 			.expected = {1,2}
@@ -56,10 +56,10 @@ int main()
 			.nums = {0,0,1,1,1,2,2,3,3,4},
 			.expected = {0,1,2,3,4}
 		},
-	};
+	});
 
-	for (Input in: inputs)
-		ft_do_test(&in);
+	for (Input test: inputs)
+		ft_do_test(test);
 
 	return (EXIT_SUCCESS);
 }

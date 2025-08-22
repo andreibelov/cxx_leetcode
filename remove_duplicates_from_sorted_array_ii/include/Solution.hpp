@@ -18,7 +18,8 @@
 #include <iostream>
 #include <algorithm>
 
-struct Solution {
+class Solution {
+public:
 	int removeDuplicates(std::vector<int>& nums);
 
 	int removeDuplicatesFaster(std::vector<int> &nums);

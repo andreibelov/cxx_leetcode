@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 14:49:48 by abelov            #+#    #+#             */
-/*   Updated: 2025/02/28 14:49:48 by abelov           ###   ########.fr       */
+/*   Created: 2025/04/24 15:23:27 by abelov            #+#    #+#             */
+/*   Updated: 2025/04/24 15:23:28 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #define SOLUTION_HPP
 
 #include <vector>
+#include <string>
+#include <utility>
+#include <iostream>
+#include <algorithm>
+
 #include <tuple>
 
 class Solution {
@@ -23,7 +28,7 @@ public:
 		int val;
 		ListNode *next;
 		ListNode() : val(0), next(nullptr) {}
-		ListNode(int x) : val(x), next(nullptr) {}
+		explicit ListNode(int x) : val(x), next(nullptr) {}
 		ListNode(int x, ListNode *next) : val(x), next(next) {}
 	};
 	/**

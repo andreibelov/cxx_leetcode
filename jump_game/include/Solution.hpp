@@ -5,39 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 23:41:29 by abelov            #+#    #+#             */
-/*   Updated: 2025/02/27 23:41:30 by abelov           ###   ########.fr       */
+/*   Created: 2025/08/20 11:27:17 by abelov            #+#    #+#             */
+/*   Updated: 2025/08/20 11:27:17 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef SOLUTION_HPP
-#define SOLUTION_HPP
 
 #include <vector>
+#include <string>
+#include <utility>
+#include <iostream>
+#include <algorithm>
 
 class Solution {
 public:
 	/**
-	 * 88. Merge Sorted Array
+	 * 55. Jump Game
 	 *
+	 * You are given an integer array nums. You are initially positioned at the
+	 * array's first index, and each element in the array represents your
+	 * maximum jump length at that position.
 	 *
-	 * @param nums1 has a length of m + n, where the first m elements denote
-	 * 			the elements that should be merged, and the last n elements
-	 * 			are set to 0 and should be ignored.
-	 * @param m
-	 * @param nums2 has a length of n
-	 * @param n
-	 *
-	 * Constraints:
-	 * 	nums1.length == m + n
-	 * 	nums2.length == n
-	 * 	0 <= m, n <= 200
-	 * 	1 <= m + n <= 200
-	 * 	-10^9 <= nums1[i], nums2[j] <= 10^9
+	 * @param nums
+	 * 	Constraints:
+	 * 		1 <= nums.length <= 10^4
+	 * 		0 <= nums[i] <= 10^5
+	 * @return true if you can reach the last index, or false otherwise.
 	 */
-	void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n);
+	bool canJump(std::vector<int>& nums);
 };
-
-
-#endif //SOLUTION_HPP

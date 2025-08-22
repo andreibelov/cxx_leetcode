@@ -9,7 +9,6 @@ default="$DEFAULT_NAME"
 while :; do
     echo "Enter name of the new project to be created:" >&2;
     read -e -r -i "$default" -p "> " raw || { echo "aborted" >&2; exit 2; }
-    echo "" >&2;
 
     # trim leading/trailing whitespace
     raw="$(printf "%s" "$raw" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"

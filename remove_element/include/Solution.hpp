@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #pragma once
+#ifndef SOLUTION_HPP
+#define SOLUTION_HPP
 
 #include <vector>
 #include <string>
@@ -18,6 +20,9 @@
 #include <iostream>
 #include <algorithm>
 
-struct Solution {
+class Solution {
+public:
 	int removeElement(std::vector<int>& nums, int val);
 };
+
+#endif //SOLUTION_HPP

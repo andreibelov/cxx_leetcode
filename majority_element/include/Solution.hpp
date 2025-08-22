@@ -18,7 +18,8 @@
 #include <iostream>
 #include <algorithm>
 
-struct Solution {
+class Solution {
+public:
 	/**
 	 * 169. Majority Element
 	 *

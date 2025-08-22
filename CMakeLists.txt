@@ -32,7 +32,6 @@ set(COMMON_LIBS
 )
 
 set(COMMON_LDFLAGS
-		-lm
 		-g3 -gdwarf-3
         -fsanitize=address,undefined,bounds,alignment,object-size
 		-fsanitize=shift,signed-integer-overflow,null,return
@@ -75,3 +74,4 @@ add_subdirectory(best_time_to_buy_and_sell_stock)
 add_subdirectory(best_time_to_buy_and_sell_stock_ii)
 add_subdirectory(best_time_to_buy_and_sell_stock_with_transact)
 add_subdirectory(best_time_to_buy_and_sell_stock_iii)
+add_subdirectory(jump_game)

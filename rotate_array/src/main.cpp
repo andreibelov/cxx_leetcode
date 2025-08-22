@@ -20,24 +20,24 @@ typedef struct s_input
 	std::vector<int>	expected;
 }	Input;
 
-int ft_do_test(Input *input)
+int ft_do_test(Input &input)
 {
-	std::vector<int> result = input->nums;
+	std::vector<int> result = input.nums;
 	Solution sol;
-	int check_val;
+	bool check_val = false;
 
-	sol.rotate(result, input->k);
-	check_val = input->expected.size() == result.size();
+	sol.rotate(result, input.k);
+	check_val = input.expected.size() == result.size();
 	if (!check_val)
 	{
 		std::cout << "got array of size [\"" << result.size()
-				  << "\"] whilst \"" << input->expected.size()
+				  << "\"] whilst \"" << input.expected.size()
 				  << "\" was to be expected" << std::endl;
 	}
-	else if ((check_val = (input->expected == result)) != 1)
+	else if ((check_val = (input.expected == result)) != 1)
 	{
 		check(check_val);
-		std::cout << "got " << result << " whilst " << input->expected
+		std::cout << "got " << result << " whilst " << input.expected
 				  << " was to be expected" << std::endl;
 	}
 	else
@@ -47,8 +47,8 @@ int ft_do_test(Input *input)
 
 int main()
 {
-
-	Input inputs[] = {
+	auto inputs = std::to_array<Input>(
+	{
 		{
 			.nums = {1,2,3,4,5,6,7},
 			.k = 3,
@@ -59,11 +59,10 @@ int main()
 			.k = 2,
 			.expected = {3,99,-1,-100}
 		},
-	};
+	});
 
-	for (auto in: inputs)
-		ft_do_test(&in);
+	for (Input test: inputs)
+		ft_do_test(test);
 
 	return (EXIT_SUCCESS);
 }
-

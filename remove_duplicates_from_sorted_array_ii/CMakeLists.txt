@@ -22,7 +22,9 @@ add_executable(${TARGET_EXE_NAME}
 target_compile_definitions(${TARGET_EXE_NAME} PRIVATE USE_SIMPLE)
 target_compile_options(${TARGET_EXE_NAME} PRIVATE ${COMMON_CFLAGS})
 target_link_options(${TARGET_EXE_NAME} PRIVATE ${COMMON_LDFLAGS})
-target_include_directories(${TARGET_EXE_NAME} PRIVATE "${PROJECT_SOURCE_DIR}/include")
+target_link_libraries(${TARGET_EXE_NAME} PRIVATE ${COMMON_LIBS})
+target_include_directories(${TARGET_EXE_NAME}
+		PRIVATE "${PROJECT_SOURCE_DIR}/include")
 
 # Drop the binary next to sources for quick runs
 set_target_properties(${TARGET_EXE_NAME} PROPERTIES

@@ -6,12 +6,12 @@
 #    By: abelov <abelov@student.42london.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/14 16:47:24 by abelov            #+#    #+#              #
-#    Updated: 2025/08/17 01:54:27 by abelov           ###   ########.fr        #
+#    Updated: 2025/08/20 11:27:17 by abelov           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 cmake_minimum_required(VERSION 3.16)
-project(majority_element CXX C ASM)
+project(jump_game CXX C ASM)
 
 set(TARGET_EXE_NAME "${PROJECT_NAME}_exe")
 
@@ -30,4 +30,3 @@ target_include_directories(${TARGET_EXE_NAME}
 set_target_properties(${TARGET_EXE_NAME} PROPERTIES
 		RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}"
 		OUTPUT_NAME "${PROJECT_NAME}")
-

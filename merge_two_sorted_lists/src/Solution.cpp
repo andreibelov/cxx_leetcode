@@ -24,16 +24,15 @@
  * @param list2
  * @return the head of the merged linked list.
  */
-Solution::ListNode *
-Solution::mergeTwoLists(ListNode *list1, ListNode *list2)
+Solution::ListNode *Solution::mergeTwoLists(ListNode *list1, ListNode *list2)
 {
-	if (!list1) return list2;
-	if (!list2) return list1;
+	if (list1 == nullptr) return list2;
+	if (list2 == nullptr) return list1;
 
 	ListNode head;
 	ListNode *tail = &head; // Pointer to build the merged list
 
-	while (list1 && list2)
+	while ((list1 != nullptr) && (list2 != nullptr))
 	{
 		if (list1->val > list2->val)
 		{
@@ -48,25 +47,21 @@ Solution::mergeTwoLists(ListNode *list1, ListNode *list2)
 		tail = tail->next;
 	}
 
-	if (list1) tail->next = list1;
+	if (list1 != nullptr) tail->next = list1;
 	else tail->next = list2;
 	return (head.next);
 }
 
-Solution::ListNode *
-Solution::mergeTwoListsRec(ListNode *list1, ListNode *list2)
+Solution::ListNode *Solution::mergeTwoListsRec(ListNode *list1, ListNode *list2)
 {
-	if (!list1) return list2;
-	if (!list2) return list1;
+	if (list1 == nullptr) return list2;
+	if (list2 == nullptr) return list1;
 
 	if (list1->val <= list2->val)
 	{
 		list1->next = mergeTwoListsRec(list1->next, list2);
 		return (list1);
 	}
-	else
-	{
-		list2->next = mergeTwoListsRec(list1, list2->next);
-		return (list2);
-	}
+	list2->next = mergeTwoListsRec(list1, list2->next);
+	return (list2);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 12:58:01 by abelov            #+#    #+#             */
-/*   Updated: 2025/02/26 12:58:03 by abelov           ###   ########.fr       */
+/*   Created: 2025/08/22 00:16:17 by abelov            #+#    #+#             */
+/*   Updated: 2025/08/22 00:16:17 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ typedef struct s_input
 
 int	ft_do_test(Input* input)
 {
-	int	result;
-	int	check_val;
+	bool	result = false;
+	bool	check_val = false;
 
-	result = Solution::isValid(input->str);
+	Solution sol;
+	result = sol.isValid(input->str);
 
-	check_val = input->expected == result;
+	check_val = (input->expected == result);
 	if (!check_val)
 	{
 		std::cout << "for string \"" << input->str << "\" got \""
