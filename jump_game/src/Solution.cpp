@@ -10,7 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/param.h>
+#include <algorithm>
+#include <ranges>
+#include <vector>
 #include "Solution.hpp"
+
+using std::views::iota;
+using std::views::zip;
 
 /**
  * 55. Jump Game
@@ -25,7 +32,23 @@
  * 		0 <= nums[i] <= 10^5
  * @return true if you can reach the last index, or false otherwise.
  */
+//__attribute__((optimize("O3"),target("no-sse,no-avx")))
+__attribute__((no_sanitize("all")))
 bool Solution::canJump(std::vector<int>& nums)
 {
-	return (int)nums.size();
+	size_t	maxReachable = 0;
+	auto	range = zip(iota(size_t{0}), nums);
+
+	for (std::tuple<size_t, int&> tup : range) {
+		size_t	i = std::get<0>(tup);
+		int		&num = std::get<1>(tup);
+
+
+		if (maxReachable < i) return (false);
+		size_t cand = i + static_cast<size_t>(num);
+//		maxReachable = std::max(maxReachable, cand);
+		maxReachable = std::max({cand, maxReachable});
+		if (maxReachable >= nums.size() - 1) return true;
+	}
+	return (true);
 }
