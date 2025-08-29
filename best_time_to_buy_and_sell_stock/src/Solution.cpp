@@ -28,7 +28,9 @@ int Solution::maxProfit(std::vector<int>& prices)
 	int min = prices.front();
 	int maxProfit = 0;
 
-	for (int current : (std::span<int>){prices.begin() + 1, prices.end()})
+//	for (int current : (std::span<int>){prices.begin() + 1, prices.end()}) // C-style trick - braced aggregate construction (std::span<int>){...}
+//	for (int current : std::span<int>(prices.begin() + 1, prices.end())) // Lower-level, equivalent
+	for (int current : std::span(prices).subspan(1)) // Clearer, higher-level:
 	{
 		maxProfit = MAX(current - min, maxProfit);
 		min = MIN(min, current);

@@ -33,10 +33,10 @@ set(COMMON_LIBS
 
 set(COMMON_LDFLAGS
 		-g3 -gdwarf-3
-		-Wl,--gc-sections -Wl,--print-gc-sections
-		-Wl,--unique=.text.*
-		-Wl,--unique=.rodata.*
-		-Wl,--unique=.data.*
+#		-Wl,--gc-sections -Wl,--print-gc-sections
+#		-Wl,--unique=.text.*
+#		-Wl,--unique=.rodata.*
+#		-Wl,--unique=.data.*
         -fsanitize=address,undefined,bounds,alignment,object-size
 		-fsanitize=shift,signed-integer-overflow,null,return
         -fsanitize=float-divide-by-zero,float-cast-overflow
@@ -53,7 +53,7 @@ set(COMMON_CFLAGS
         -masm=att
 		-fif-conversion -fif-conversion2
 		-fno-guess-branch-probability # makes GCC treat the branch as unpredictable, which increases chances of cmov.
-		-ffunction-sections -fdata-sections
+#		-ffunction-sections -fdata-sections
         -fno-omit-frame-pointer
         -fdwarf2-cfi-asm
         -fcf-protection=none
@@ -79,3 +79,4 @@ add_subdirectory(best_time_to_buy_and_sell_stock_ii)
 add_subdirectory(best_time_to_buy_and_sell_stock_with_transact)
 add_subdirectory(best_time_to_buy_and_sell_stock_iii)
 add_subdirectory(jump_game)
+add_subdirectory(game_of_life)

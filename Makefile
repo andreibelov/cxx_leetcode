@@ -10,18 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-# Scaffolding Makefile
-# Usage:
-#   make new
-#   make list-template
-#
-# Creates:
-#   <name>/
-#     CMakeLists.txt
-#     src/main.cpp
-#     src/Solution.cpp
-#     include/Solution.hpp
-
 SHELL			:= /bin/bash
 
 # remove built-in suffix rules to avoid fallback like '.o'
@@ -53,7 +41,7 @@ all: ensure-template
 	$(Q)echo -e "  Creates new assignment project folder based on a template\n"
 	$(Q)printf '=%.0s' {1..60}; printf '\n\n'
 
-## Core rule: make new-<name>
+## make new-<name>
 new-%: ensure-template
 	$(Q)set -e; \
 	export name="$*"; \
@@ -97,7 +85,7 @@ ensure-template:
 		exit 3; \
 	}
 
-# Show what is in the template
+## Show what is in the template
 list-template: ensure-template
 	$(Q)printf "Template files under %s:\n" "$(TEMPLATE_DIR)"
 	$(Q)find "$(TEMPLATE_DIR)" -maxdepth 2 -type f | sed 's|^|  |'
@@ -105,7 +93,7 @@ list-template: ensure-template
 # Name for interactive mode if NAME was not provided
 PROJECT_NAME ?= $(shell bash ./scripts/get_project_name.sh)
 
-# Interactive variant, will prompt for the name
+## Interactive prompt for the name
 new: ensure-template
 	+$(Q)$(MAKE) --no-print-directory new-$(PROJECT_NAME)
 

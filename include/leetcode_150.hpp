@@ -18,6 +18,7 @@
 #include <iostream>
 #include <iterator>
 #include <vector>
+#include <ranges>
 
 # define FT_RED   "\033[0;31m"
 # define FT_GREEN "\033[0;32m"
@@ -56,5 +57,33 @@ std::ostream &operator<<(std::ostream &os, const std::vector<int> &v)
 	os << "]";
 	return os;
 }
+
+std::ostream& operator<<(std::ostream& os,
+								const std::vector<std::vector<int>>& m) {
+	os << "[";
+	if (!m.empty()) {
+		os << "\n  " << m.front();
+		for (const std::vector<int>& it : std::span(m).subspan(1)) {
+			os << ",\n  " << it;
+		}
+		os << "\n";
+	}
+	os << "]";
+	return os;
+}
+
+template <class T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
+	os << "[";
+	if (!v.empty())
+	{
+		os << v.front();
+		for (const auto &elem: v)
+			os << ", " << elem;
+	}
+	os << "]";
+	return os;
+}
+
 
 #endif //LEETCODE_150_HPP

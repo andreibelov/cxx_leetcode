@@ -32,7 +32,8 @@ using std::views::zip;
  * 		0 <= nums[i] <= 10^5
  * @return true if you can reach the last index, or false otherwise.
  */
-//__attribute__((optimize("O3"),target("no-sse,no-avx")))
+__attribute__((optimize("O3"),target("no-sse,no-avx")))
+__attribute__((optimize("inline-functions-called-once")))
 __attribute__((no_sanitize("all")))
 bool Solution::canJump(std::vector<int>& nums)
 {
@@ -41,14 +42,13 @@ bool Solution::canJump(std::vector<int>& nums)
 
 	for (std::tuple<size_t, int&> tup : range) {
 		size_t	i = std::get<0>(tup);
-		int		&num = std::get<1>(tup);
+		size_t cand = i + (size_t)(std::get<1>(tup));
 
-
-		if (maxReachable < i) return (false);
-		size_t cand = i + static_cast<size_t>(num);
-//		maxReachable = std::max(maxReachable, cand);
-		maxReachable = std::max({cand, maxReachable});
-		if (maxReachable >= nums.size() - 1) return true;
+		if (maxReachable < i)
+			return (false);
+		maxReachable = std::max(maxReachable, cand);
+		if (maxReachable >= nums.size() - 1)
+			return true;
 	}
 	return (true);
 }

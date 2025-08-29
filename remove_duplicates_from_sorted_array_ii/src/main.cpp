@@ -48,8 +48,8 @@ int ft_do_test(Input *input)
 
 int main()
 {
-
-	Input inputs[] = {
+	auto	inputs = std::to_array<Input>(
+	{
 		{
 			.nums = {1,1,1,2,2,3},
 			.expected = {1,1,2,2,3}
@@ -58,7 +58,7 @@ int main()
 			.nums = {0,0,1,1,1,1,2,3,3},
 			.expected = {0,0,1,1,2,3,3}
 		},
-	};
+	});
 
 	for (Input in: inputs)
 		ft_do_test(&in);

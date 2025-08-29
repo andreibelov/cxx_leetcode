@@ -16,20 +16,21 @@ int ft_do_test(Input &input)
 	Solution sol;
 	sol.solve(input.nums, input.val);
 	check_val = input.expected.size() == input.nums.size();
-	if (check_val)
+	if (!check_val)
 	{
 		std::cout << "got array of size [\"" << result.size()
 				  << "\"] whilst [\"" << input.expected.size()
 				  << "\"] was to be expected" << std::endl;
 	}
-	else if (!(check_val = (input.expected == input.nums)))
-	{
-		check(check_val);
-		std::cout << "got " << result << " whilst " << input.expected
-				  << " was to be expected" << std::endl;
+	else {
+		check_val = (input.expected == input.nums);
+		if (!check_val)
+			std::cout << "got " << result
+					  << " whilst " << input.expected
+					  << " was to be expected"
+					  << std::endl;
 	}
-	else
-		check(check_val);
+	check(check_val);
 	return (0);
 }
 
@@ -49,7 +50,7 @@ int main()
 		},
 	});
 
-	for (Input test: inputs)
+	for (Input& test: inputs)
 		ft_do_test(test);
 
 	return (EXIT_SUCCESS);
