@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelov <abelov@student.42london.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/17 01:57:45 by abelov            #+#    #+#             */
-/*   Updated: 2025/09/17 01:57:45 by abelov           ###   ########.fr       */
+/*   Created: 2025/09/17 12:03:56 by abelov            #+#    #+#             */
+/*   Updated: 2025/09/17 12:03:56 by abelov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include <utility>
 #include <iostream>
 #include <algorithm>
-#include <queue>
 
 struct TreeNode {
     int val;
@@ -30,12 +29,12 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-TreeNode *deserialize_level_order(std::vector<std::optional<int>> &nums);
-void free_tree(TreeNode *root);
-
 class Solution {
 public:
-	int maxDepth(TreeNode* root);
+	std::vector<int> rightSideView(TreeNode* root);
 };
+
+TreeNode *deserialize_level_order(std::vector<std::optional<int>> &nums);
+void free_tree(TreeNode *root);
 
 #endif //SOLUTION_HPP

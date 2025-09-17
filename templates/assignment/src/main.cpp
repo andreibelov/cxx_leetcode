@@ -15,17 +15,17 @@ int ft_do_test(Input &input)
 
 	Solution sol;
 	sol.solve(input.nums, input.val);
-	check_val = input.expected.size() == input.nums.size();
+	check_val = input.expected.size() == result.size();
 	if (!check_val)
 	{
-		std::cout << "got array of size [\"" << result.size()
+		std::cout << "Size mismatch: got array of size [\"" << result.size()
 				  << "\"] whilst [\"" << input.expected.size()
 				  << "\"] was to be expected" << std::endl;
 	}
 	else {
-		check_val = (input.expected == input.nums);
+		check_val = (input.expected == result);
 		if (!check_val)
-			std::cout << "got " << result
+			std::cout << "Value mismatch: got " << result
 					  << " whilst " << input.expected
 					  << " was to be expected"
 					  << std::endl;
