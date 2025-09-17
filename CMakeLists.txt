@@ -40,7 +40,6 @@ set(COMMON_LDFLAGS
         -fsanitize=address,undefined,bounds,alignment,object-size
 		-fsanitize=shift,signed-integer-overflow,null,return
         -fsanitize=float-divide-by-zero,float-cast-overflow
-		-fno-sanitize-recover
 )
 
 set(COMMON_CFLAGS
@@ -49,7 +48,7 @@ set(COMMON_CFLAGS
         -Wwrite-strings -Wnarrowing
         -Wno-error=unused-parameter
         -Wno-error=unused-variable
-		-O3 -march=native
+		-O0 -march=native
         -masm=att
 		-fif-conversion -fif-conversion2
 		-fno-guess-branch-probability # makes GCC treat the branch as unpredictable, which increases chances of cmov.
@@ -62,7 +61,8 @@ set(COMMON_CFLAGS
         -fasynchronous-unwind-tables
         -fsanitize=address,undefined
 		-fsanitize=float-divide-by-zero,float-cast-overflow
-		-fno-sanitize-recover
+		-fno-sanitize-recover=address
+#		-fsanitize-undefined-trap-on-error
 )
 
 add_subdirectory(valid_parentheses)
@@ -80,3 +80,4 @@ add_subdirectory(best_time_to_buy_and_sell_stock_with_transact)
 add_subdirectory(best_time_to_buy_and_sell_stock_iii)
 add_subdirectory(jump_game)
 add_subdirectory(game_of_life)
+add_subdirectory(min_stack)
