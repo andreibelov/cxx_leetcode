@@ -61,7 +61,7 @@ set(COMMON_CFLAGS
         -fasynchronous-unwind-tables
         -fsanitize=address,undefined
 		-fsanitize=float-divide-by-zero,float-cast-overflow
-		-fno-sanitize-recover=address
+#		-fno-sanitize-recover=address
 #		-fsanitize-undefined-trap-on-error
 )
 
@@ -81,3 +81,4 @@ add_subdirectory(best_time_to_buy_and_sell_stock_iii)
 add_subdirectory(jump_game)
 add_subdirectory(game_of_life)
 add_subdirectory(min_stack)
+add_subdirectory(maximum_depth_of_binary_tree)
