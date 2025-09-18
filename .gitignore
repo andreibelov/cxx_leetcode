@@ -39,6 +39,7 @@ gdb.txt
 /min_stack/min_stack
 /maximum_depth_of_binary_tree/maximum_depth_of_binary_tree
 /binary_tree_right_side_view/binary_tree_right_side_view
+/generate_parentheses/generate_parentheses
 main
 
 ### C template
