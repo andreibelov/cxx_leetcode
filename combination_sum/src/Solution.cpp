@@ -32,20 +32,25 @@ std::vector<std::vector<int>> Solution::combinationSum(std::vector<int>& candida
 	std::vector<std::vector<int>> out;
 	enum class e_state : std::uint8_t { LEFT = 0, RIGHT, DONE };
 	using enum e_state;
-	struct Frame {std::vector<int> denominators; int target; std::vector<int> so_far; e_state state;};
+	struct Frame {size_t idx; int target; std::vector<int> so_far; e_state state;};
+
+	if (candidates.empty())
+		return out;
 
 	std::sort(candidates.begin(), candidates.end());
-	auto last = std::unique(candidates.begin(), candidates.end());
-	candidates.erase(last, candidates.end());
+	candidates.erase(std::unique(candidates.begin(), candidates.end()), candidates.end());
+
 	std::vector<Frame> st;
 	st.reserve(2UL * target);
 
 	st.push_back(Frame{
-		.denominators = candidates,
+		.idx = 0,
 		.target = target,
 		.so_far = std::vector<int>(),
 		.state = LEFT
 	});
+
+	const size_t n = candidates.size();
 
 	while (!st.empty()) {
 		Frame fr = st.back();
@@ -55,7 +60,7 @@ std::vector<std::vector<int>> Solution::combinationSum(std::vector<int>& candida
 			out.push_back(fr.so_far);
 			continue;
 		}
-		if (fr.target < 0) {
+		if (fr.target < 0 || fr.idx >= n) {
 			continue;
 		}
 
@@ -66,9 +71,10 @@ std::vector<std::vector<int>> Solution::combinationSum(std::vector<int>& candida
 				copy.state = RIGHT;
 				st.push_back(copy);
 
-				if (!fr.denominators.empty() && (fr.target - fr.denominators.back()) >= 0) {
-					copy.target = fr.target - fr.denominators.back();
-					copy.so_far.emplace_back(fr.denominators.back());
+				int candidate = candidates[fr.idx];
+				if (candidate > 0 && (fr.target - candidate) >= 0) {
+					copy.target = fr.target - candidate;
+					copy.so_far.emplace_back(candidate);
 					copy.state = LEFT;
 					st.push_back(copy);
 				}
@@ -78,11 +84,10 @@ std::vector<std::vector<int>> Solution::combinationSum(std::vector<int>& candida
 				Frame copy = fr;
 				copy.state = DONE;
 				st.push_back(copy);
-				if (!copy.denominators.empty()) {
-					copy.denominators.pop_back();
-					copy.state = LEFT;
-					st.push_back(copy);
-				}
+
+				copy.idx += 1;
+				copy.state = LEFT;
+				st.push_back(copy);
 				break ;
 			}
 			case e_state::DONE:
