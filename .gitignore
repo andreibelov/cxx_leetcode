@@ -41,6 +41,7 @@ gdb.txt
 /binary_tree_right_side_view/binary_tree_right_side_view
 /generate_parentheses/generate_parentheses
 /coin_change/coin_change
+/combination_sum/combination_sum
 main
 
 ### C template

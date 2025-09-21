@@ -23,7 +23,7 @@
 int Solution::coinChange(std::vector<int>& coins, int amount)
 {
 	int fewest = -1;
-	enum e_state { LEFT = 0, RIGHT, SELF }; // NOLINT(*-enum-size)
+	enum e_state { LEFT = 0, RIGHT, DONE }; // NOLINT(*-enum-size)
 
 	std::vector<std::vector<int>> out;
 
@@ -68,7 +68,7 @@ int Solution::coinChange(std::vector<int>& coins, int amount)
 				[[fallthrough]];
 			}
 			case RIGHT: {
-				fr.state = SELF;
+				fr.state = DONE;
 				stack.push_back(fr);
 				fr.denominations.pop_back();
 				if (!fr.denominations.empty()) {
@@ -81,8 +81,10 @@ int Solution::coinChange(std::vector<int>& coins, int amount)
 				}
 				[[fallthrough]];
 			}
-			case SELF:
+			case DONE:
 				break;
+			default:
+				;
 		}
 
 	}
