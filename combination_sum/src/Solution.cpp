@@ -30,9 +30,10 @@
 std::vector<std::vector<int>> Solution::combinationSum(std::vector<int>& candidates, int target)
 {
 	std::vector<std::vector<int>> out;
+
 	enum class e_state : std::uint8_t { LEFT = 0, RIGHT, DONE };
 	using enum e_state;
-	struct Frame {size_t idx; int target; std::vector<int> so_far; e_state state;};
+	struct Frame {size_t idx; int target; size_t size; e_state state;};
 
 	if (candidates.empty())
 		return out;
@@ -40,13 +41,15 @@ std::vector<std::vector<int>> Solution::combinationSum(std::vector<int>& candida
 	std::sort(candidates.begin(), candidates.end());
 	candidates.erase(std::unique(candidates.begin(), candidates.end()), candidates.end());
 
+	std::vector<int> so_far;
+
 	std::vector<Frame> st;
 	st.reserve(2UL * target);
 
 	st.push_back(Frame{
 		.idx = 0,
 		.target = target,
-		.so_far = std::vector<int>(),
+		.size = 0,
 		.state = LEFT
 	});
 
@@ -56,11 +59,13 @@ std::vector<std::vector<int>> Solution::combinationSum(std::vector<int>& candida
 		Frame fr = st.back();
 		st.pop_back();
 
+		so_far.resize(fr.size);
+
 		if (fr.target == 0) {
-			out.push_back(fr.so_far);
+			out.push_back(so_far);
 			continue;
 		}
-		if (fr.target < 0 || fr.idx >= n) {
+		if (fr.idx >= n || candidates[fr.idx] > fr.target) {
 			continue;
 		}
 
@@ -73,8 +78,9 @@ std::vector<std::vector<int>> Solution::combinationSum(std::vector<int>& candida
 
 				int candidate = candidates[fr.idx];
 				if (candidate > 0 && (fr.target - candidate) >= 0) {
+					so_far.emplace_back(candidate);
 					copy.target = fr.target - candidate;
-					copy.so_far.emplace_back(candidate);
+					copy.size = so_far.size();
 					copy.state = LEFT;
 					st.push_back(copy);
 				}
@@ -92,6 +98,8 @@ std::vector<std::vector<int>> Solution::combinationSum(std::vector<int>& candida
 			}
 			case e_state::DONE:
 				break;
+			default:
+				;
 		}
 
 	}
