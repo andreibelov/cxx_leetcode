@@ -42,6 +42,7 @@ gdb.txt
 /generate_parentheses/generate_parentheses
 /coin_change/coin_change
 /combination_sum/combination_sum
+/combination_sum_ii/combination_sum_ii
 main
 
 ### C template
