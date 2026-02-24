@@ -37,8 +37,7 @@ std::vector<std::vector<int>> Solution::combinationSum2(std::vector<int>& candid
 	std::vector<int> path;
 	std::vector<Frame> st;
 
-	const size_t n = candidates.size();
-	if (n == 0) return out;
+	if (candidates.size() == 0) return out;
 
 	st.push_back(Frame{.start=0, .idx=0, .rem=target, .state=PRE_CHILD});
 
@@ -50,7 +49,7 @@ std::vector<std::vector<int>> Solution::combinationSum2(std::vector<int>& candid
 			out.push_back(path);
 			continue;
 		}
-		if (fr.start >= n || candidates[fr.start] > fr.rem) {
+		if (fr.start >= candidates.size() || candidates[fr.start] > fr.rem) {
 			continue;
 		}
 
@@ -58,7 +57,7 @@ std::vector<std::vector<int>> Solution::combinationSum2(std::vector<int>& candid
 			case PRE_CHILD: {
 				bool found = false;
 
-				while (fr.idx < n) {
+				while (fr.idx < candidates.size()) {
 					if (candidates[fr.idx] > fr.rem)
 						break;
 
@@ -114,6 +113,7 @@ std::vector<std::vector<int>> Solution::combinationSum2_rec(std::vector<int>& ca
 {
 	sort(candidates.begin(), candidates.end());
 	std::vector<std::vector<int>> result;
+
 	std::vector<int> curr;
 
 	std::function<void(size_t, int)> backtrack = [&](size_t startIndex, int remainingTarget) -> void {
@@ -121,8 +121,7 @@ std::vector<std::vector<int>> Solution::combinationSum2_rec(std::vector<int>& ca
 			result.emplace_back(curr);
 			return;
 		}
-		if (startIndex >= candidates.size() ||
-			remainingTarget < candidates[startIndex])
+		if (startIndex >= candidates.size() || remainingTarget < candidates[startIndex])
 			return;
 
 		for (size_t currentIndex = startIndex; currentIndex < candidates.size(); ++currentIndex) {

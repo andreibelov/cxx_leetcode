@@ -14,9 +14,8 @@ cmake_minimum_required(VERSION 3.27)
 
 include_directories(include)
 
-set(CMAKE_C_COMPILER gcc-13)
-set(CMAKE_CXX_COMPILER gcc-13)
-#set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_C_COMPILER gcc-12)
+set(CMAKE_CXX_COMPILER g++)
 #set(CMAKE_CXX_COMPILER clang++)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -87,3 +86,4 @@ add_subdirectory(generate_parentheses)
 add_subdirectory(coin_change)
 add_subdirectory(combination_sum)
 add_subdirectory(combination_sum_ii)
+add_subdirectory(reverse_words_in_a_string)

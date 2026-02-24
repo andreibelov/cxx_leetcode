@@ -19,6 +19,7 @@
 #include <iterator>
 #include <vector>
 #include <ranges>
+#include <span>
 
 # define FT_RED   "\033[0;31m"
 # define FT_GREEN "\033[0;32m"

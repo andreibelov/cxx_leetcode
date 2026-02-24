@@ -43,6 +43,7 @@ gdb.txt
 /coin_change/coin_change
 /combination_sum/combination_sum
 /combination_sum_ii/combination_sum_ii
+/reverse_words_in_a_string/reverse_words_in_a_string
 main
 
 ### C template
