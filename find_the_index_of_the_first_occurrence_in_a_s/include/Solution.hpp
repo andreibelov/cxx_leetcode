@@ -22,7 +22,7 @@
 
 class Solution {
 public:
-	int strStr(std::string haystack, std::string needle);
+	int strStr(const std::string& haystack, const std::string& needle);
 };
 
 #endif //SOLUTION_HPP
