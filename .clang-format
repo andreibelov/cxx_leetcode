@@ -1,0 +1,73 @@
+# Generated from CLion C/C++ Code Style settings
+BasedOnStyle: LLVM
+AccessModifierOffset: -4
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignOperands: Align
+AllowAllArgumentsOnNextLine: true
+AllowAllConstructorInitializersOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLambdasOnASingleLine: All
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBraces: Custom
+BinPackParameters: false
+BinPackArguments: false
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterFunction: true
+  AfterNamespace: false
+  AfterUnion: false
+  BeforeCatch: false
+  BeforeElse: false
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: true
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: AfterColon
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+BreakInheritanceList: BeforeColon
+ColumnLimit: 100
+CompactNamespaces: false
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+IndentCaseLabels: true
+IndentPPDirectives: None
+IndentWidth: 4
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 2
+NamespaceIndentation: All
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: true
+PointerAlignment: Right
+PenaltyBreakBeforeFirstCallParameter: 0
+ReflowComments: false
+Standard: c++03
+SpaceAfterCStyleCast: true
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+TabWidth: 4
+UseTab: Always
