@@ -14,6 +14,7 @@ Checks: >
   -performance-avoid-endl,
   -modernize-use-trailing-return-type,
   -modernize-use-ranges,
+  -modernize-use-auto,
 
 WarningsAsErrors: ''
 HeaderFilterRegex: '.*'
