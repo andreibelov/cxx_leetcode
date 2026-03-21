@@ -12,6 +12,8 @@
 
 #include "Solution.hpp"
 
+#include <utility>
+
 /**
  * 45. Jump Game II
  *
@@ -27,7 +29,7 @@ int Solution::jump(std::vector<int>& nums)
 	int last = 0;
 	int mx = 0;
 
-	for (int i = 0; i < (int)(nums.size() - 1); ++i) {
+	for (int i = 0; std::cmp_less(i ,(nums.size() - 1)); ++i) {
 		mx = std::max(mx, i + nums[i]);
 		if (i == last) {
 			ans++;
