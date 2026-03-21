@@ -9,6 +9,7 @@ Checks: >
   -readability-braces-around-statements,  
   -readability-identifier-length,
   -readability-convert-member-functions-to-static,
+  -cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-owning-memory,
   -performance-avoid-endl,

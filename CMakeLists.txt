@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.18)
 
 include_directories(include)
 
@@ -89,3 +89,4 @@ add_subdirectory(combination_sum_ii)
 add_subdirectory(reverse_words_in_a_string)
 add_subdirectory(find_the_index_of_the_first_occurrence_in_a_s)
 add_subdirectory(merge_k_sorted_lists)
+add_subdirectory(jump_game_ii)
