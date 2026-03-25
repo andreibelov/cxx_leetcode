@@ -32,6 +32,24 @@ LRUCache::LRUCache(int capacity)
 	tail->prev = head;
 }
 
+LRUCache::~LRUCache()
+{
+	deleteChain(head);
+	head = nullptr;
+	tail = nullptr;
+	cache.clear();
+	currentSize = 0;
+}
+
+void LRUCache::deleteChain(Node *node)
+{
+	if (node == nullptr)
+		return;
+	Node *next = node->next;
+	delete node;
+	deleteChain(next);
+}
+
 int LRUCache::get(int key)
 {
 	if (cache.count(key) == 0U) return -1;
@@ -48,7 +66,7 @@ void LRUCache::put(int key, int value)
 		node->value = value;
 		promoteNode(node); // Move node to head as it's recently used
 	}
-	else  // Key not found, need to insert a new node
+	else  // Key isn't found, need to insert a new node
 	{
 		Node *node = new Node(key, value);
 		cache[key] = node;

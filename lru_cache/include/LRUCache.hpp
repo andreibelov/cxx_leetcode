@@ -17,7 +17,17 @@
 #pragma GCC optimize("O3,unroll-loops,Ofast")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx")
 
+#include <cstdint>
 #include <unordered_map>
+
+enum class Operation : std::uint8_t
+{
+	op_create = 0,
+	op_put,
+	op_get
+};
+
+using enum Operation;
 
 struct Node
 {
@@ -46,9 +56,11 @@ private:
 	Node*	removeTail();
 	void	addNode(Node* node);
 	void	promoteNode(Node* node);
+	void	deleteChain(Node* node);
 
 public:
 	LRUCache(int capacity);
+	~LRUCache();
 	int get(int key);
 	void put(int key, int value);
 };
