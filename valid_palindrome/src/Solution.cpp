@@ -14,13 +14,6 @@
 
 bool  Solution::isPalindrome(std::string str)
 {
-	int (*toLower)(unsigned char) = [](unsigned char c) { return std::tolower(c); };
-	std::transform(str.begin(), str.end(), str.begin(), toLower);
-
-	bool (*isNonAlphanumeric)(unsigned char) = [](unsigned char c) { return !std::isalnum(c); };
-	auto iterator = std::remove_if(str.begin(), str.end(), isNonAlphanumeric);
-	str.erase(iterator, str.end());
-
 	if (str.empty() || str.size() == 1)
 		return true;
 
@@ -28,7 +21,15 @@ bool  Solution::isPalindrome(std::string str)
 	size_t end = str.size() - 1;
 
 	while(start <= end) {
-		if ((unsigned char)str[start++] != (unsigned char)str[end--])
+		while (start < end && std::isalnum((unsigned char)str[start]) == 0) ++start;
+		while (end > start && std::isalnum((unsigned char)str[end]) == 0) --end;
+
+		if (start == end)
+			break;
+
+		int lhs = std::tolower((unsigned char) str[start++]);
+		int rhs = std::tolower((unsigned char) str[end--]);
+		if (lhs != rhs)
 			return false;
 	}
 

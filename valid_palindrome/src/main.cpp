@@ -59,6 +59,10 @@ int main()
 				.input = "a",
 				.expected = true
 			},
+			{
+				.input = "a.",
+				.expected = true
+			},
 		});
 
 	for (Input &test: inputs)
