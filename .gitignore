@@ -50,6 +50,8 @@ gdb.txt
 /h_index/h_index
 /insert_delete_getrandom_o1/insert_delete_getrandom_o1
 /product_of_array_except_self/product_of_array_except_self
+/roman_to_integer/roman_to_integer
+/valid_palindrome/valid_palindrome
 main
 
 ### C template

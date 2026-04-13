@@ -14,7 +14,6 @@ cmake_minimum_required(VERSION 3.18)
 
 include_directories(include)
 
-set(CMAKE_C_COMPILER gcc-12)
 set(CMAKE_CXX_COMPILER g++)
 #set(CMAKE_CXX_COMPILER clang++)
 
@@ -93,3 +92,5 @@ add_subdirectory(jump_game_ii)
 add_subdirectory(h_index)
 add_subdirectory(insert_delete_getrandom_o1)
 add_subdirectory(product_of_array_except_self)
+add_subdirectory(roman_to_integer)
+add_subdirectory(valid_palindrome)
