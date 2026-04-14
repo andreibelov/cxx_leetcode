@@ -14,11 +14,12 @@
 #ifndef SOLUTION_HPP
 #define SOLUTION_HPP
 
-#include <vector>
+#include <algorithm>
+#include <climits>
+#include <iostream>
 #include <string>
 #include <utility>
-#include <iostream>
-#include <algorithm>
+#include <vector>
 
 /**
  * 13. Roman to Integer

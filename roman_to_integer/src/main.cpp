@@ -27,9 +27,9 @@ int ft_do_test(Input &input)
 	bool check_val = (input.expected == result);
 	if (!check_val)
 	{
-		std::cout << "for \"" << input.str << "\" got "
-				  << result << " whilst "
-				  << input.expected << " was to be expected" << std::endl;
+		std::cout << "for \"" << input.str << "\" got " << result
+				  << " whilst " << input.expected
+				  << " was to be expected" << std::endl;
 	}
 	check(check_val);
 	return (0);
