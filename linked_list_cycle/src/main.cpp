@@ -78,7 +78,7 @@ int ft_do_test(Input &input)
 	Solution::ListNode *head = toList(input.nums, input.pos);
 
 	Solution sol;
-	result = sol.hasCycle(head);
+	result = sol.hasCycle2(head);
 	check_val = (input.expected == result);
 	if (!check_val)
 	{

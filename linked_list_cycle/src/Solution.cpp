@@ -11,22 +11,45 @@
 /* ************************************************************************** */
 
 #include "Solution.hpp"
-#include <set>
+#include <unordered_set>
 
 bool Solution::hasCycle(ListNode *head)
 {
-		std::set<ListNode *> table;
+		std::unordered_set<ListNode *> visitedNodes;
 
 		ListNode* next = nullptr;
 		while (head != nullptr)
 		{
 			next = head->next;
-			table.insert(head);
-			if (table.contains(next))
+			visitedNodes.insert(head);
+			if (visitedNodes.contains(next))
 				goto has_cycle;
 			head = next;
 		}
 		return false;
 	has_cycle:
 		return true;
+}
+
+/**
+ * Using Floyd's Cycle Detection Algorithm (Tortoise and Hare)
+ * https://en.wikipedia.org/wiki/Cycle_detection
+ * @param head
+ * @return
+ */
+bool Solution::hasCycle2(ListNode *head)
+{
+	if(head == nullptr || head->next == nullptr)
+		return false;
+
+	ListNode *hare	   = head->next;
+	ListNode *tortoise = head;
+	while(hare != tortoise)
+	{
+		if (hare->next == nullptr || hare->next->next == nullptr)
+			return false;
+		hare	 = hare->next->next;
+		tortoise = tortoise->next;
+	}
+	return true;
 }
