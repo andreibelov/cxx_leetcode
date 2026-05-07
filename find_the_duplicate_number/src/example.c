@@ -11,170 +11,114 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
 #define POOL_CAP 8
-#define NIL -1
 #define PAYLOAD_CAP 32
 
-typedef struct Packet
-{
-	int id;
-	size_t len;
-	char payload[PAYLOAD_CAP];
-}	Packet;
+struct Packet {
+	int		id;
+	size_t	len;
+	char	payload[PAYLOAD_CAP];
+};
 
-typedef struct Slot {
+union Slot {
 	struct Packet packet;
-	int next;
-	int used;
-}	Slot;
+	union Slot *next_free;
+};
 
-typedef struct PacketPool {
-	struct Slot slots[POOL_CAP];
-	int free_head;
-	int active_head;
-}	PacketPool;
+struct PacketPool {
+	union Slot slots[POOL_CAP];
+	union Slot *free_head;
+};
 
-void pool_init(PacketPool *pool)
+void pool_init(struct PacketPool *pool)
 {
-	int i = -1;
-	while (++i < POOL_CAP) {
-		pool->slots[i].next = i + 1;
-		pool->slots[i].used = 0;
-	}
+	size_t i = -1;
 
-	pool->slots[POOL_CAP - 1].next = NIL;
-	pool->free_head = 0;
-	pool->active_head = NIL;
+	while (++i + 1 < POOL_CAP)
+		pool->slots[i].next_free = &pool->slots[i + 1];
+
+	pool->slots[POOL_CAP - 1].next_free = NULL;
+	pool->free_head = &pool->slots[0];
 }
 
-int pool_alloc(struct PacketPool *pool)
+struct Packet *pool_alloc(struct PacketPool *pool)
 {
-	if (pool->free_head == NIL)
-		return NIL;
+	union Slot *slot;
 
-	int idx = pool->free_head;
-	pool->free_head = pool->slots[idx].next;
+	if (pool->free_head == NULL)
+		return NULL;
 
-	pool->slots[idx].used = 1;
+	slot = pool->free_head;
+	pool->free_head = slot->next_free;
 
-	pool->slots[idx].next = pool->active_head;
-	pool->active_head = idx;
+	memset(&slot->packet, 0, sizeof(slot->packet));
 
-	return idx;
+	return &slot->packet;
 }
 
-int pool_free(struct PacketPool *pool, int idx)
+void pool_free(struct PacketPool *pool, struct Packet *packet)
 {
-	if (idx < 0 || idx >= POOL_CAP || pool->slots[idx].used == 0)
-		return -1;
+	union Slot *slot;
 
-	int cur = pool->active_head;
-	int prev = NIL;
+	if (packet == NULL)
+		return;
 
-	while (cur != NIL) {
-		if (cur == idx)
-			break;
+	slot = (union Slot *)packet;
 
-		prev = cur;
-		cur = pool->slots[cur].next;
-	}
-
-	if (cur == NIL)
-		return -1;
-
-	if (prev == NIL)
-		pool->active_head = pool->slots[cur].next;
-	else
-		pool->slots[prev].next = pool->slots[cur].next;
-
-	pool->slots[idx].used = 0;
-	pool->slots[idx].next = pool->free_head;
-	pool->free_head = idx;
-
-	return 0;
+	slot->next_free = pool->free_head;
+	pool->free_head = slot;
 }
 
-void packet_set(struct PacketPool *pool, int idx, int id, const char *text)
+static void packet_set(struct Packet *packet, int id, const char *payload)
 {
-	struct Packet *pkt;
-
-	pkt = &pool->slots[idx].packet;
-
-	pkt->id = id;
-	snprintf(pkt->payload, sizeof(pkt->payload), "%s", text);
-	pkt->len = strlen(pkt->payload);
+	packet->id = id;
+	snprintf(packet->payload, sizeof(packet->payload), "%s", payload);
+	packet->len = strlen(packet->payload);
 }
 
-void dump_active(struct PacketPool *pool)
-{
-	int cur = pool->active_head;
-
-	printf("active packets:\n");
-
-	while (cur != NIL) {
-		struct Packet *pkt = &pool->slots[cur].packet;
-
-		printf("  slot=%d id=%d len=%zu payload=\"%s\" next=%d\n",
-			   cur,
-			   pkt->id,
-			   pkt->len,
-			   pkt->payload,
-			   pool->slots[cur].next);
-
-		cur = pool->slots[cur].next;
-	}
-}
-
-void dump_free(struct PacketPool *pool)
-{
-	int cur = pool->free_head;
-
-	printf("free slots: ");
-
-	while (cur != NIL) {
-		printf("%d", cur);
-		cur = pool->slots[cur].next;
-
-		if (cur != NIL)
-			printf(" -> ");
-	}
-
-	printf("\n");
-}
-
+/**
+ * https://github.com/endurodave/C_Allocator/blob/master/main.cpp
+ * https://github.com/8dcc/libpool/blob/main/examples/libpool-example.c
+ * @return
+ */
 int main(void)
 {
-	PacketPool pool;
+	struct PacketPool pool;
+
 	pool_init(&pool);
 
-	int a = pool_alloc(&pool);
-	int b = pool_alloc(&pool);
-	int c = pool_alloc(&pool);
+	struct Packet *a = pool_alloc(&pool);
+	struct Packet *b = pool_alloc(&pool);
+	struct Packet *c = pool_alloc(&pool);
 
-	if (a == NIL || b == NIL || c == NIL) {
-		dprintf(STDERR_FILENO, "pool_alloc failed\n");
+
+	if (a == NULL || b == NULL || c == NULL) {
+		fprintf(stderr, "packet_alloc failed\n");
+		return EXIT_FAILURE;
+	}
+
+	packet_set(a, 100, "arp request");
+	packet_set(b, 101, "ipv4 packet");
+	packet_set(c, 102, "tcp segment");
+
+	fprintf(stdout, "%d %zu %s\n", a->id, a->len, a->payload);
+	fprintf(stdout, "%d %zu %s\n", b->id, b->len, b->payload);
+	fprintf(stdout, "%d %zu %s\n", c->id, c->len, c->payload);
+
+	pool_free(&pool, b);
+
+	b = pool_alloc(&pool);
+	if (b == NULL) {
+		fprintf(stderr, "packet_alloc failed\n");
 		return 1;
 	}
 
-	packet_set(&pool, a, 100, "arp request");
-	packet_set(&pool, b, 101, "ipv4 packet");
-	packet_set(&pool, c, 102, "tcp segment");
+	packet_set(b, 103, "reused packet slot");
 
-	dump_active(&pool);
-	dump_free(&pool);
-
-	printf("\nfreeing slot %d\n\n", b);
-
-	if (pool_free(&pool, b) != 0) {
-		dprintf(STDERR_FILENO, "pool_free failed\n");
-		return 1;
-	}
-
-	dump_active(&pool);
-	dump_free(&pool);
+	fprintf(stdout, "%d %zu %s\n", b->id, b->len, b->payload);
 
 	return 0;
 }
