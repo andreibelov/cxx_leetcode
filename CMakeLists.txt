@@ -15,6 +15,7 @@ cmake_minimum_required(VERSION 3.18)
 include_directories(include)
 
 set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_C_COMPILER gcc)
 #set(CMAKE_CXX_COMPILER clang++)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -40,7 +41,7 @@ set(COMMON_LDFLAGS
         -fsanitize=float-divide-by-zero,float-cast-overflow
 )
 
-set(COMMON_CFLAGS
+set(COMMON_CXXFLAGS
 		-x c++
         -Wall -Wextra -Werror
         -Wwrite-strings -Wnarrowing
@@ -61,6 +62,28 @@ set(COMMON_CFLAGS
 		-fsanitize=float-divide-by-zero,float-cast-overflow
 #		-fno-sanitize-recover=address
 #		-fsanitize-undefined-trap-on-error
+)
+
+set(COMMON_CFLAGS
+		-Wall -Wextra -Werror
+		-Wwrite-strings -Wnarrowing
+		-Wno-error=unused-parameter
+		-Wno-error=unused-variable
+		-Og -g3 -gdwarf-3
+		-march=native
+		-masm=intel
+		-fif-conversion
+		-fif-conversion2
+		-fno-guess-branch-probability # makes GCC treat the branch as unpredictable, which increases chances of cmov.
+		-fno-omit-frame-pointer
+		-fdwarf2-cfi-asm
+		-fcf-protection=none
+		-mmanual-endbr
+		-fasynchronous-unwind-tables
+		-fsanitize=address,undefined
+		-fsanitize=float-divide-by-zero,float-cast-overflow
+		#		-fno-sanitize-recover=address
+		#		-fsanitize-undefined-trap-on-error
 )
 
 add_subdirectory(valid_parentheses)
@@ -95,3 +118,4 @@ add_subdirectory(product_of_array_except_self)
 add_subdirectory(roman_to_integer)
 add_subdirectory(valid_palindrome)
 add_subdirectory(linked_list_cycle)
+add_subdirectory(find_the_duplicate_number)

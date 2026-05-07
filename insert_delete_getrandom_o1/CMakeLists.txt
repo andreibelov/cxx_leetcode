@@ -21,7 +21,7 @@ add_executable(${TARGET_EXE_NAME}
 		src/Solution.cpp)
 
 target_compile_definitions(${TARGET_EXE_NAME} PRIVATE USE_SIMPLE)
-target_compile_options(${TARGET_EXE_NAME} PRIVATE ${COMMON_CFLAGS})
+target_compile_options(${TARGET_EXE_NAME} PRIVATE ${COMMON_CXXFLAGS})
 target_link_options(${TARGET_EXE_NAME} PRIVATE ${COMMON_LDFLAGS})
 target_link_libraries(${TARGET_EXE_NAME} PRIVATE ${COMMON_LIBS})
 target_include_directories(${TARGET_EXE_NAME}

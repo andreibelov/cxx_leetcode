@@ -53,6 +53,8 @@ gdb.txt
 /roman_to_integer/roman_to_integer
 /valid_palindrome/valid_palindrome
 /linked_list_cycle/linked_list_cycle
+/find_the_duplicate_number/find_the_duplicate_number_example
+/find_the_duplicate_number/find_the_duplicate_number
 main
 
 ### C template
