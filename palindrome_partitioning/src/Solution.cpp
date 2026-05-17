@@ -66,28 +66,7 @@ std::vector<std::vector<std::string>> Solution::partition(std::string s){
 
 	std::vector<std::string> currentPart;
 
-	std::function<void(int)> backtrack = [&](int startIndex) -> void {
-		if (startIndex != n) {
-			int endIndex = startIndex;
-
-			while(endIndex < n){
-				if (isPalindrome[startIndex][endIndex]) {
-					// If substring s[startIndex...endIndex] is palindrome
-					const std::string &substr = s.substr(startIndex, endIndex - startIndex + 1);
-					currentPart.push_back(substr);
-					
-					backtrack(endIndex + 1); // Recursively partition the remaining string
-
-					currentPart.pop_back(); // Backtrack: remove the last added substring
-				}
-				++endIndex;
-			}
-		} else {
-			partitions.push_back(currentPart);
-		}
-	};
-
-	backtrack(0);
+	backtrack(s, n, isPalindrome, currentPart, partitions, 0);
 
 	return partitions;
 }
