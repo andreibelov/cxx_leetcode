@@ -12,36 +12,6 @@
 
 #include "Solution.hpp"
 
-
-void backtrack(
-	const std::string& s,
-	size_t n,
-	const std::vector<std::vector<bool>>& isPalindrome,
-	std::vector<std::string>& current,
-	std::vector<std::vector<std::string>>& result,
-	size_t startIndex
-) {
-	if (startIndex != n) {
-
-		size_t endIndex = startIndex;
-
-		while (endIndex < n) {
-			if (isPalindrome[startIndex][endIndex]) {
-				const std::string &substr = s.substr(startIndex, endIndex - startIndex + 1);
-				current.push_back(substr);
-
-				backtrack(s, n, isPalindrome, current, result, endIndex + 1);
-
-				current.pop_back();
-			}
-
-			++endIndex;
-		}
-	} else {
-		result.push_back(current);
-	}
-}
-
 /**
  * 131. Palindrome Partitioning
  * Given a string s, partition s such that every substring of the partition is a palindrome.
@@ -66,7 +36,41 @@ std::vector<std::vector<std::string>> Solution::partition(std::string s){
 
 	std::vector<std::string> currentPart;
 
-	backtrack(s, n, isPalindrome, currentPart, partitions, 0);
+	struct Frame {
+		int startIndex;
+		int nextEndIndex;
+		bool ownsCurrentPart;
+	};
+
+	std::vector<Frame> stack;
+	stack.push_back({.startIndex=0, .nextEndIndex=0, .ownsCurrentPart=false});
+
+	while (!stack.empty()) {
+		Frame &frame = stack.back();
+
+		if (frame.startIndex == n) {
+			bool ownsCurrentPart = frame.ownsCurrentPart;
+			partitions.push_back(currentPart);
+			stack.pop_back();
+			if (ownsCurrentPart)
+				currentPart.pop_back();
+			continue;
+		}
+
+		if (frame.nextEndIndex >= n) {
+			bool ownsCurrentPart = frame.ownsCurrentPart;
+			stack.pop_back();
+			if (ownsCurrentPart)
+				currentPart.pop_back();
+			continue;
+		}
+
+		int endIndex = frame.nextEndIndex++;
+		if (isPalindrome[frame.startIndex][endIndex]) {
+			currentPart.push_back(s.substr(frame.startIndex, endIndex - frame.startIndex + 1));
+			stack.push_back({.startIndex=endIndex + 1, .nextEndIndex=endIndex + 1, .ownsCurrentPart=true});
+		}
+	}
 
 	return partitions;
 }
